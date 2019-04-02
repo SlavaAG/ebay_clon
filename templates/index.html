@@ -14,19 +14,12 @@
       <div class="container">
         <h1>Каталог товаров</h1>
         <h2>Смарт-часы</h2>
-        <div class="row">
-          <div class="col-3">
-            {% for product in catalog %}
-            <img src="{{ product.image }}">
-            {% endfor %}
-          </div>
-          <div class="col-9">
-            {% for product in catalog %}
-            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-            <hr />
-            {% endfor %}
-          </div>
-        </div>
+        {% for product in catalog %}
+        <h3 class="text-right"><img src="{{ product.image }}" class="rounded float-left">
+          <a href="{{ product.url }}">{{ product.title }}</a></h3>
+        <br><br><br><br><br><br>
+        <hr />
+        {% endfor %}
       </div>
     
 
