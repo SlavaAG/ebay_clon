@@ -20,7 +20,7 @@ def get_ebay_products():
         for product in all_products:
             title = product.find('h3').text
             url = product.find('a')['href']
-            price = product.find('span').text
+            price = product.find('div', 's-item__detail s-item__detail--primary').text
             try:
                 image = product.find('img')['data-src']
             except KeyError:
