@@ -1,14 +1,15 @@
 from flask import Flask, render_template
 
-from webapp.ebay_content import get_ebay_products
+from webapp.model import db, Catalog
 
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.py')
+    db.init_app(app)
 
     @app.route('/')
     def index():
-        catalog = get_ebay_products()
+        catalog = Catalog.query.all()
         return render_template('index.html', catalog = catalog)
     
     return app

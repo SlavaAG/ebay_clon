@@ -1,6 +1,7 @@
 import requests
-
 from bs4 import BeautifulSoup
+
+from webapp.model import db, Catalog
 
 def get_html(url):
     try:
@@ -25,10 +26,12 @@ def get_ebay_products():
                 image = product.find('img')['data-src']
             except KeyError:
                 image = product.find('img')['src']
-            products_list.append({
-                "title": title,
-                "url": url,
-                "price": price,
-                "image": image
-            })
-        return products_list
+            save_catalog(title, url, price, image)
+
+def save_catalog(title, url, price, image):
+    catalog_exists = Catalog.query.filter(Catalog.url == url).count()
+    print(catalog_exists)
+    if not catalog_exists:
+        catalog_item = Catalog(title = title, url = url, price = price, image = image)
+        db.session.add(catalog_item)
+        db.session.commit()
