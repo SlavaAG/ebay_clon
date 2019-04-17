@@ -1,7 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 
-from webapp.model import db, Catalog
+from webapp.db import db
+from webapp.catalog.models import Catalog
 
 def get_html(url):
     try:

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-warning" role="alert">
+        {% for message in messages %}
+            {{ message }}<br>
+        {% endfor %}
+        </div>
+        {% endif %}
+    {% endwith %}
+    {% for product in catalog %}
+    <img src="{{ product.image }}" class="rounded float-left mr-5">
+    <h3 class="text-left"><a href="{{ product.url }}">{{ product.title }}</a></h3>
+    <br>
+    <p class="text-left">{{ product.price }}</p>
+    <br><br><br><br><br>
+    <hr />
+    {% endfor %}
+{% endblock %}
