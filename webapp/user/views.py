@@ -41,7 +41,7 @@ def register():
         return redirect(url_for('catalog.index'))
     title = "Регистрация"
     form = RegistrationForm()
-    return render_template('user/registration.html', page_title = title, form = register_form)
+    return render_template('user/registration.html', page_title = title, form = form)
 
 @blueprint.route('/process-reg', methods = ['POST'])
 def process_reg():
@@ -53,5 +53,10 @@ def process_reg():
         db.session.commit()
         flash('Вы успешно зарегистрировались!')
         return redirect(url_for('user.login'))
-    flash('Пожалуйста, исправьте ошибки в форме')
-    return redirect(url_for('user.register'))
+    else:
+        for field, errors in form.errors.items():
+            for error in errors:
+                flash('Ошибка в поле {}: {}'.format(
+                    getattr(form, field).label.text, error
+                ))
+        return redirect(url_for('user.register'))

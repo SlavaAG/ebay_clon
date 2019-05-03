@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-4">
+        <img src="{{ product.image }}">
+    </div>
+    <div class="col-8">
+        <p>{{ product.price }}</p>
+    </div>
+    <div class="mt-5">
+        {{ product.text|safe }}
+    </div>
+</div>
+    
+{% endblock %}
